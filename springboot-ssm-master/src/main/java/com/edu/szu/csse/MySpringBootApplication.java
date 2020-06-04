@@ -6,7 +6,7 @@ import org.springframework.boot.web.servlet.ServletComponentScan;
 
 //@SpringBootApplication(exclude={DataSourceAutoConfiguration.class,HibernateJpaAutoConfiguration.class})
 @SpringBootApplication
-@ServletComponentScan("com.szu.edu.csse") // Servlet、Filter、Listener可以直接通过@WebServlet、@WebFilter、@WebListener注解自动注册，无需其他代码。
+@ServletComponentScan("com.edu.szu.csse") // Servlet、Filter、Listener可以直接通过@WebServlet、@WebFilter、@WebListener注解自动注册，无需其他代码。
 //@EnableAutoConfiguration(exclude={DataSourceAutoConfiguration.class})
 public class MySpringBootApplication {
 	public static void main(String[] args) {

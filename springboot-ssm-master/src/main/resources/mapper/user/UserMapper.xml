@@ -78,7 +78,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from user
+    from szu_user
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -89,21 +89,21 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    from user
+    from szu_user
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from user
+    delete from szu_user
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="com.edu.szu.csse.bean.user.UserExample" >
-    delete from user
+    delete from szu_user
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
   <insert id="insert" parameterType="com.edu.szu.csse.bean.user.User" >
-    insert into user (id, username, password, 
+    insert into szu_user (id, username, password,
       userfullname, createtime, isdeleted, 
       sex, address)
     values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
@@ -111,7 +111,7 @@
       #{sex,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.edu.szu.csse.bean.user.User" >
-    insert into user
+    insert into szu_user
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
@@ -166,13 +166,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.edu.szu.csse.bean.user.UserExample" resultType="java.lang.Integer" >
-    select count(*) from user
+    select count(*) from szu_user
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update user
+    update szu_user
     <set >
       <if test="record.id != null" >
         id = #{record.id,jdbcType=INTEGER},
@@ -204,7 +204,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update user
+    update szu_user
     set id = #{record.id,jdbcType=INTEGER},
       username = #{record.username,jdbcType=VARCHAR},
       password = #{record.password,jdbcType=VARCHAR},
@@ -218,7 +218,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.edu.szu.csse.bean.user.User" >
-    update user
+    update szu_user
     <set >
       <if test="username != null" >
         username = #{username,jdbcType=VARCHAR},

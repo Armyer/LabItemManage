@@ -32,7 +32,7 @@ public class WeixinController {
 
 		// 将请求、响应的编码均设置为UTF-8（防止中文乱码）
 		request.setCharacterEncoding("UTF-8"); // 微信服务器POST消息时用的是UTF-8编码，在接收时也要用同样的编码，否则中文会乱码；
-		response.setCharacterEncoding("UTF-8"); // 在响应消息（回复消息给用户）时，也将编码方式设置为UTF-8，原理同上；
+//		response.setCharacterEncoding("UTF-8"); // 在响应消息（回复消息给用户）时，也将编码方式设置为UTF-8，原理同上；
 
 		String method = request.getMethod().toLowerCase();
 		logger.info("method: {}", method);
