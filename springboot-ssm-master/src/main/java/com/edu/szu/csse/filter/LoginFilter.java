@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.edu.szu.csse.bean.Admin;
 import com.edu.szu.csse.bean.user.User;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -41,16 +42,29 @@ public class LoginFilter implements Filter {
 
 		// 如果包含login或者访问静态资源就放行
 		if (StringUtils.containsIgnoreCase(path, "login") || path.contains("/static/") || path.contains("/mobile/")
-				|| path.contains("/weixin/") || path.contains("/chat") || path.contains("/user/")) {
+				|| path.contains("/weixin/") || path.contains("/chat") || path.contains("/user/")||path.contains("/index/")) {
 
 			chain.doFilter(request, response); // 放行
 			return;
 		}
 		HttpServletResponse res = (HttpServletResponse) response;
 		HttpSession session = req.getSession();
-		User user = (User) session.getAttribute("user");
+//		User user = (User) session.getAttribute("user");
 		// 如果session中存在user证明用户登录，可以放行。否则认为未登陆重定向到login.html
-		if (user == null) {
+//		if (user == null) {
+//			res.sendRedirect(req.getContextPath() + "/login.html");
+//		} else {
+//			chain.doFilter(request, response);
+//		}
+
+
+		/**
+		 * add by jiang 2020/6/5
+		 */
+		Admin admin = (Admin) session.getAttribute("admin");
+		// 如果session中存在user证明用户登录，可以放行。否则认为未登陆重定向到login.html
+		if (admin == null) {
+//			logger.info("login jiang: ",admin.toString());
 			res.sendRedirect(req.getContextPath() + "/login.html");
 		} else {
 			chain.doFilter(request, response);

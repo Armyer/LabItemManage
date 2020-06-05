@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.edu.szu.csse.mapper.user.AdminMapper" >
+    <resultMap id="BaseResultMap" type="com.edu.szu.csse.bean.Admin" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="adminname" property="adminname" jdbcType="VARCHAR" />
+        <result column="adminpassword" property="adminpassword" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <select id="search" resultMap="BaseResultMap" parameterType="com.edu.szu.csse.bean.Admin" >
+        select *
+        from szu_admin
+        where adminname = #{adminname,jdbcType=INTEGER} and adminpassword = #{adminpassword,jdbcType=INTEGER}
+    </select>
+
+</mapper>
