@@ -96,6 +96,7 @@ public class UserController {
 	@ResponseBody
 	public PageInfo<User> getUsers(@RequestParam Map condition) {
 		int pageNum = 1;
+		System.out.println("***************************************");
 		if (ValidateCheck.isNotNull(MapUtils.getString(condition, "pageNum"))) { // 如果不为空的话改变当前页号
 			pageNum = Integer.parseInt(MapUtils.getString(condition, "pageNum"));
 		}

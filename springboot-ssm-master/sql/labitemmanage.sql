@@ -4,16 +4,30 @@ Navicat MySQL Data Transfer
 Source Server         : test1
 Source Server Version : 50096
 Source Host           : localhost:3306
-Source Database       : szu
+Source Database       : labitemmanage
 
 Target Server Type    : MYSQL
 Target Server Version : 50096
 File Encoding         : 65001
 
-Date: 2020-06-02 17:25:29
+Date: 2020-06-07 02:53:59
 */
 
 SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for country
+-- ----------------------------
+DROP TABLE IF EXISTS `country`;
+CREATE TABLE `country` (
+  `id` int(11) NOT NULL auto_increment,
+  `countryname` varchar(255) default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of country
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for device_teacher
@@ -33,7 +47,6 @@ CREATE TABLE `device_teacher` (
 -- ----------------------------
 -- Records of device_teacher
 -- ----------------------------
-INSERT INTO `device_teacher` VALUES ('1', '1', '5201');
 
 -- ----------------------------
 -- Table structure for device_user
@@ -57,12 +70,92 @@ CREATE TABLE `device_user` (
 INSERT INTO `device_user` VALUES ('1', '1', '181027', '2020-06-02 17:25:18');
 
 -- ----------------------------
+-- Table structure for system_shiro_permission
+-- ----------------------------
+DROP TABLE IF EXISTS `system_shiro_permission`;
+CREATE TABLE `system_shiro_permission` (
+  `id` int(11) NOT NULL auto_increment,
+  `description` varchar(255) default NULL,
+  `name` varchar(255) default NULL,
+  `url` varchar(255) default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of system_shiro_permission
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for system_shiro_role
+-- ----------------------------
+DROP TABLE IF EXISTS `system_shiro_role`;
+CREATE TABLE `system_shiro_role` (
+  `id` int(11) NOT NULL auto_increment,
+  `description` varchar(255) default NULL,
+  `name` varchar(255) default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of system_shiro_role
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for system_shiro_role_permissions
+-- ----------------------------
+DROP TABLE IF EXISTS `system_shiro_role_permissions`;
+CREATE TABLE `system_shiro_role_permissions` (
+  `role_id` int(11) NOT NULL,
+  `permissions_id` int(11) NOT NULL,
+  UNIQUE KEY `UK_9bgrr9y35k9deh6os7fq2hxjc` (`permissions_id`),
+  KEY `FKid5g3kh3jhoj05a1jbt3gwxe9` (`role_id`),
+  CONSTRAINT `FKid5g3kh3jhoj05a1jbt3gwxe9` FOREIGN KEY (`role_id`) REFERENCES `system_shiro_role` (`id`),
+  CONSTRAINT `FKbcw322i3a5p5h7oxkj1np3num` FOREIGN KEY (`permissions_id`) REFERENCES `system_shiro_permission` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of system_shiro_role_permissions
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for system_shiro_user
+-- ----------------------------
+DROP TABLE IF EXISTS `system_shiro_user`;
+CREATE TABLE `system_shiro_user` (
+  `id` int(11) NOT NULL auto_increment,
+  `password` varchar(255) default NULL,
+  `username` varchar(255) default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of system_shiro_user
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for system_shiro_user_roles
+-- ----------------------------
+DROP TABLE IF EXISTS `system_shiro_user_roles`;
+CREATE TABLE `system_shiro_user_roles` (
+  `shiro_user_id` int(11) NOT NULL,
+  `roles_id` int(11) NOT NULL,
+  UNIQUE KEY `UK_i8llcnohdpe9u5xfnba0g4jqy` (`roles_id`),
+  KEY `FKj4gcmlp5wm0fapx9vuuois1mf` (`shiro_user_id`),
+  CONSTRAINT `FKj4gcmlp5wm0fapx9vuuois1mf` FOREIGN KEY (`shiro_user_id`) REFERENCES `system_shiro_user` (`id`),
+  CONSTRAINT `FK17tnfmqx52t71ct60elbg66rv` FOREIGN KEY (`roles_id`) REFERENCES `system_shiro_role` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of system_shiro_user_roles
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for szu_admin
 -- ----------------------------
 DROP TABLE IF EXISTS `szu_admin`;
 CREATE TABLE `szu_admin` (
   `id` bigint(20) unsigned NOT NULL auto_increment,
-  `admin` varchar(20) character set utf8 NOT NULL COMMENT '管理员账户',
+  `adminname` varchar(20) character set utf8 NOT NULL COMMENT '管理员账户',
   `adminpassword` varchar(20) NOT NULL COMMENT '管理员密码',
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1 COMMENT='管理系统-管理员表';
@@ -71,6 +164,7 @@ CREATE TABLE `szu_admin` (
 -- Records of szu_admin
 -- ----------------------------
 INSERT INTO `szu_admin` VALUES ('1', 'admin', 'admin');
+INSERT INTO `szu_admin` VALUES ('2', '1', '1');
 
 -- ----------------------------
 -- Table structure for szu_device
@@ -102,18 +196,16 @@ CREATE TABLE `szu_teacher` (
   `teacher_name` varchar(20) character set utf8 NOT NULL COMMENT '老师姓名',
   `mobile` varchar(20) NOT NULL COMMENT '手机号',
   `email` varchar(255) NOT NULL COMMENT '邮箱',
-  `create_time` bigint(20) NOT NULL default '0' COMMENT '创建时间',
-  `status` char(10) character set utf8 NOT NULL COMMENT '状态',
+  `create_time` date NOT NULL default '0000-00-00' COMMENT '创建时间',
+  `status` varchar(10) character set utf8 NOT NULL COMMENT '状态',
   PRIMARY KEY  (`id`),
   KEY `teacher_id` (`teacher_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1 COMMENT='管理系统-教师表';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 COMMENT='管理系统-教师表';
 
 -- ----------------------------
 -- Records of szu_teacher
 -- ----------------------------
-INSERT INTO `szu_teacher` VALUES ('1', '5201', '陈剑勇', '0000', '0000', '0', '正常');
-INSERT INTO `szu_teacher` VALUES ('2', '5202', '林秋镇', '1111', '1111', '0', '正常');
-INSERT INTO `szu_teacher` VALUES ('3', '5203', '罗', '222', '222', '0', '正常');
+INSERT INTO `szu_teacher` VALUES ('1', '5201', '陈剑勇', '111', '111', '2020-06-07', '1');
 
 -- ----------------------------
 -- Table structure for szu_user
@@ -130,9 +222,32 @@ CREATE TABLE `szu_user` (
   `address` varchar(40) default NULL,
   PRIMARY KEY  (`id`),
   KEY `username` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of szu_user
 -- ----------------------------
 INSERT INTO `szu_user` VALUES ('1', '181027', '123456', 'cs', '2020-06-02', null, '', null);
+
+-- ----------------------------
+-- Table structure for user2
+-- ----------------------------
+DROP TABLE IF EXISTS `user2`;
+CREATE TABLE `user2` (
+  `id` int(11) NOT NULL auto_increment,
+  `address` varchar(255) default NULL,
+  `createtime` datetime default NULL,
+  `isdeleted` varchar(255) default NULL,
+  `password` varchar(255) default NULL,
+  `sex` varchar(255) default NULL,
+  `userfullname` varchar(255) default NULL,
+  `username` varchar(255) default NULL,
+  `country_id` int(11) default NULL,
+  PRIMARY KEY  (`id`),
+  KEY `FK7pbuv6u730marax4lerumgy4s` (`country_id`),
+  CONSTRAINT `FK7pbuv6u730marax4lerumgy4s` FOREIGN KEY (`country_id`) REFERENCES `country` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of user2
+-- ----------------------------

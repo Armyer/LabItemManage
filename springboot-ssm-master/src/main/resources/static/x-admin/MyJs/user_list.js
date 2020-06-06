@@ -29,7 +29,7 @@ function showUsersTable(pageInfo){
         var index = (pageNum - 1) * pageSize + i + 1;
         var tr = "<tr>"
             +'<td>'+index+'</td>'
-            +'<td>'+replaceNull(users[i].id)+'</td>'
+            // +'<td>'+replaceNull(users[i].id)+'</td>'
             +'<td>'+replaceNull(users[i].username)+'</td>'
             +'<td>'+replaceNull(users[i].userfullname)+'</td>'
             +'<td>'+replaceNull(users[i].sex)+'</td>'
