@@ -32,12 +32,12 @@ public class AdminController {
 //        HttpSession session  =
 
         logger.info("admin ->"+admin.toString());
-        if(adminService.login(admin)==1){
+        if(adminService.login(admin.getAdminname(),admin.getAdminpassword())!=null){
             model.addAttribute(admin);
             request.getSession(true).setAttribute("admin",admin);
             return JSONResultUtil.ok();
         }
-        return JSONResultUtil.error("error！！");
+        return JSONResultUtil.error("username or password is error！！");
     }
 
 }

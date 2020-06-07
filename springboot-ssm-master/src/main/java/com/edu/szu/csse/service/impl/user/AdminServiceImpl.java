@@ -1,11 +1,15 @@
 package com.edu.szu.csse.service.impl.user;
 
 import com.edu.szu.csse.bean.Admin;
+import com.edu.szu.csse.bean.AdminExample;
 import com.edu.szu.csse.mapper.user.AdminMapper;
 import com.edu.szu.csse.service.AdminService;
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 /**
  * Created by jiang on 2020/6/5.
@@ -19,16 +23,17 @@ public class AdminServiceImpl implements AdminService{
 
 
     @Override
-    public int login(Admin admin) {
+    public Admin login(String adminname, String adminpassword) {
 
-//        Admin admin = new Admin();
-//        admin.setAdminname(adminname);
-//        admin.setAdminpassword(adminpassword);
-        Admin result  = adminMapper.search(admin);
-        if(result!=null){
-            return 1;
-        }else{
-            return 0;
+        AdminExample adminExample = new AdminExample();
+        AdminExample.Criteria createCriteria = adminExample.createCriteria();
+        createCriteria.andAdminnameEqualTo(adminname);
+        createCriteria.andAdminpasswordEqualTo(adminpassword);
+        List<Admin> selectByExample = adminMapper.selectByExample(adminExample);
+        if(CollectionUtils.isNotEmpty(selectByExample)){
+            return selectByExample.get(0);
         }
+        return null;
+
     }
 }

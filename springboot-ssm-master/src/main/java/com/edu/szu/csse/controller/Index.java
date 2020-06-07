@@ -37,4 +37,11 @@ public class Index {
 	public String teacher_add() {
 		return "teacher-list";
 	}
+
+	@RequestMapping("/admin-list")
+	public String admin_list(){return "admin-list";}
+
+
+
+
 }
