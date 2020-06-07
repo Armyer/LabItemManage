@@ -32,4 +32,9 @@ public class Index {
 	public String member_add() {
 		return "user-add";
 	}
+
+	@RequestMapping("/teacher-list")
+	public String teacher_add() {
+		return "teacher-list";
+	}
 }
