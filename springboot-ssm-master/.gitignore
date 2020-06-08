@@ -1,2 +1,6 @@
 /target/
 /src/test/
+.idea
+.gitignore
+/log
+*.iml

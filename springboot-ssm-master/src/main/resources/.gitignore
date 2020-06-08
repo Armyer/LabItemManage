@@ -1,1 +1,7 @@
 /application.properties
+/target/
+/src/test/
+.idea
+.gitignore
+/log
+*.iml

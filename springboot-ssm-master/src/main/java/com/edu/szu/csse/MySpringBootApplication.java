@@ -16,4 +16,5 @@ public class MySpringBootApplication {
 		// 入口运行类
 		SpringApplication.run(MySpringBootApplication.class, args);
 	}
+
 }
