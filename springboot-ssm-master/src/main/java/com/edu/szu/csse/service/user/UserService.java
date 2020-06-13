@@ -22,4 +22,6 @@ public interface UserService {
 	User findUserByUsername(String username);
 
 	User getUserByUserNameAndPassword(String username, String password);
+
+	String getDevice_user(String device_id);
 }

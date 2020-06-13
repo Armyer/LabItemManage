@@ -255,4 +255,8 @@
       address = #{address,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="getDevice_user" resultType="String" parameterType="String">
+    SELECT userfullname from szu_user user LEFT JOIN device_user on user.username = device_user.username where device_user.device_id = #{id,jdbcType=VARCHAR}
+
+  </select>
 </mapper>

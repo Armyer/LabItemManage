@@ -40,6 +40,27 @@ public class UserController {
 	private UserService userService;
 
 	/**
+	 * 根据设备id查询用户姓名
+	 *
+	 * @param
+	 *
+	 * @return
+	 */
+	@RequestMapping("getDevice_user")
+	@ResponseBody
+	public String getDevice_user(@RequestParam("id") String id){
+//		System.out.println("???");
+//		System.out.println(id);
+		String userfullname = null;
+		userfullname = userService.getDevice_user(id);
+		System.out.println(userfullname);
+		return userfullname;
+	}
+
+
+
+
+	/**
 	 * 添加user
 	 * 
 	 * @param user

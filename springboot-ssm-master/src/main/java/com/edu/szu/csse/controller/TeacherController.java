@@ -53,6 +53,7 @@ public class TeacherController {
         int pageNum = 1;
         //测试
         System.out.println("***************************************");
+        System.out.println(condition);
         if (ValidateCheck.isNotNull(MapUtils.getString(condition, "pageNum"))) { // 如果不为空的话改变当前页号
             pageNum = Integer.parseInt(MapUtils.getString(condition, "pageNum"));
         }

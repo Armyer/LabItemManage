@@ -40,8 +40,6 @@ public class Index {
 
 	@RequestMapping("/admin-list")
 	public String admin_list(){return "admin-list";}
-
-
-
-
+	@RequestMapping("/device-list")
+	public String device_list(){return "device-list";}
 }

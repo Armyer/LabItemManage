@@ -30,4 +30,6 @@ public interface UserMapper {
 	int updateByPrimaryKeySelective(User record);
 
 	int updateByPrimaryKey(User record);
+
+	String getDevice_user(String id);
 }

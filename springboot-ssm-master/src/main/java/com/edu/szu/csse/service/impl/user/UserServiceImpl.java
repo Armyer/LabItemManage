@@ -90,4 +90,10 @@ public class UserServiceImpl implements UserService {
 		return null;
 	}
 
+	@Override
+	public String getDevice_user(String device_id) {
+		String userfullname = userMapper.getDevice_user(device_id);
+		return userfullname;
+	}
+
 }
